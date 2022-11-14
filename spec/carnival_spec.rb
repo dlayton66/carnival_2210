@@ -132,6 +132,31 @@ RSpec.describe Carnival do
     end
   end
 
+  describe '#visitor_info' do
+    it 'stores the fave ride and money spent for a visitor' do
+      carnival.add_ride(ride1)
+      carnival.add_ride(ride2)
+      carnival.add_ride(ride3)
+
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride1.board_rider(visitor1)
+      ride2.board_rider(visitor1)
+      ride2.board_rider(visitor2)
+      ride2.board_rider(visitor3)
+      ride3.board_rider(visitor1)
+      ride3.board_rider(visitor2)
+      ride3.board_rider(visitor3)
+
+      expected = {
+                  fave_ride: carnival.fave_ride(visitor1),
+                  money_spent: carnival.money_spent(visitor1)
+                 }
+      
+      expect(carnival.visitor_info(visitor1)).to eq(expected)
+    end
+  end
+
   describe '#fave_ride' do
     it 'returns the favorite ride of a visitor' do
       carnival.add_ride(ride1)

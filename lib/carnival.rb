@@ -35,15 +35,14 @@ class Carnival
     end.flatten.uniq
   end
 
-  def visitor_hash(visitor)
+  def visitor_info(visitor)
     {
-      name: visitor.name,
       fave_ride: fave_ride(visitor),
       money_spent: money_spent(visitor)
     }
-    visitors.each do |visitor|
-      visitor_hash[visitor]
-    end
+    # visitors.each do |visitor|
+    #   visitor_hash[visitor]
+    # end
   end
 
   def fave_ride(visitor)
@@ -58,13 +57,15 @@ class Carnival
     end
   end
 
-  # def summary
-  #   {
-  #     visitor_count: visitors.count,
-  #     revenue_earned: total_revenue,
-  #     visitor_info: [
-  #                   
-  #                   ]
-  #   }
-  # end
+  def summary
+    visitor_hash = {}
+    {
+      visitor_count: visitors.count,
+      revenue_earned: total_revenue,
+      visitor_hash: {
+                     visitor1: visitor_info(visitor1)
+                    
+                    }
+    }
+  end
 end
