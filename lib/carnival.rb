@@ -52,13 +52,19 @@ class Carnival
     end
   end
 
+  def money_spent(visitor)
+    @rides.sum do |ride|
+      ride.rider_log[visitor]*ride.admission_fee
+    end
+  end
+
   # def summary
   #   {
   #     visitor_count: visitors.count,
   #     revenue_earned: total_revenue,
-  #     visitor_hash: {
-  #                    
-  #                   }
+  #     visitor_info: [
+  #                   
+  #                   ]
   #   }
   # end
 end

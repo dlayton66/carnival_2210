@@ -151,4 +151,26 @@ RSpec.describe Carnival do
       expect(carnival.fave_ride(visitor1)).to eq(ride1)
     end
   end
+
+  describe '#money_spent' do
+    it 'returns the amount of money a visitor spent' do
+      carnival.add_ride(ride1)
+      carnival.add_ride(ride2)
+      carnival.add_ride(ride3)
+
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride1.board_rider(visitor1)
+      ride2.board_rider(visitor1)
+      ride2.board_rider(visitor2)
+      ride2.board_rider(visitor3)
+      ride3.board_rider(visitor1)
+      ride3.board_rider(visitor2)
+      ride3.board_rider(visitor3)
+
+      expect(carnival.money_spent(visitor1)).to eq(7)
+      expect(carnival.money_spent(visitor2)).to eq(6)
+      expect(carnival.money_spent(visitor3)).to eq(2)
+    end
+  end
 end
