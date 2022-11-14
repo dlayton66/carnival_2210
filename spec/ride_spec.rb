@@ -20,4 +20,18 @@ RSpec.describe Ride do
     expect(ride1.excitement).to eq(:gentle)
     expect(ride1.total_revenue).to eq(0)
   end
+
+  describe '#board_rider' do
+    it 'adds 1 to visitor rides in rider_log' do
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride1.board_rider(visitor1)
+
+      expected = {
+                  visitor1 => 2,
+                  visitor2 => 1
+      }
+      expect(ride1.rider_log).to eq(expected)
+    end
+  end
 end
