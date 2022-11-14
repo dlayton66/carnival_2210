@@ -17,5 +17,6 @@ class Ride
 
   def board_rider(visitor)
     @rider_log[visitor] += 1
+    visitor.spending_money -= 1
   end
 end
