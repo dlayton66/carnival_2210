@@ -16,4 +16,11 @@ class Carnival
       ride.rider_log.values.sum
     end
   end
+
+  def most_profitable_ride
+    @rides.max_by do |ride|
+      require 'pry'; binding.pry
+      ride.total_revenue
+    end
+  end
 end
