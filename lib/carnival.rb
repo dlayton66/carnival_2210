@@ -63,11 +63,25 @@ class Carnival
     end
   end
 
+  def riders(ride)
+    ride.rider_log.map do |visitor|
+      visitor[0]
+    end.uniq
+  end
+
+  def ride_info(ride)
+    {
+      ride: ride,
+      riders: riders(ride),
+      total_revenue: ride.total_revenue
+    }
+  end
+
   def summary
     {
       visitor_count: visitors.count,
       revenue_earned: total_revenue,
-      visitor_hash: visitor_hash
+      all_visitor_info: all_visitor_info
     }
   end
 end
