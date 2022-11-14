@@ -77,6 +77,14 @@ class Carnival
     }
   end
 
+  def all_ride_info
+    all_ride_info = []
+    rides.each do |ride|
+      all_ride_info << ride_info(ride)
+    end
+    all_ride_info
+  end
+
   def summary
     {
       visitor_count: visitors.count,

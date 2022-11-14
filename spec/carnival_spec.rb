@@ -108,7 +108,7 @@ RSpec.describe Carnival do
       ride3.board_rider(visitor2)
       ride3.board_rider(visitor3)
 
-      expect(carnival.total_revenue).to eq(15)
+      expect(carnival.total_revenue).to eq(10)
     end
   end
 
@@ -220,8 +220,81 @@ RSpec.describe Carnival do
       ride3.board_rider(visitor3)
 
       expect(carnival.money_spent(visitor1)).to eq(7)
-      expect(carnival.money_spent(visitor2)).to eq(6)
+      expect(carnival.money_spent(visitor2)).to eq(1)
       expect(carnival.money_spent(visitor3)).to eq(2)
+    end
+  end
+
+  describe '#riders' do
+    it 'returns a list of riders for a specific ride' do
+      carnival.add_ride(ride1)
+      carnival.add_ride(ride2)
+      carnival.add_ride(ride3)
+
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride1.board_rider(visitor1)
+      ride2.board_rider(visitor1)
+      ride2.board_rider(visitor2)
+      ride2.board_rider(visitor3)
+      ride3.board_rider(visitor1)
+      ride3.board_rider(visitor2)
+      ride3.board_rider(visitor3)
+
+      expect(carnival.riders(ride1)).to eq([visitor1,visitor2])
+      expect(carnival.riders(ride2)).to eq([visitor1])
+      expect(carnival.riders(ride3)).to eq([visitor3])
+    end
+  end
+
+  describe '#ride_info' do
+    it 'returns riders and ride total revenue' do
+      carnival.add_ride(ride1)
+      carnival.add_ride(ride2)
+      carnival.add_ride(ride3)
+
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride1.board_rider(visitor1)
+      ride2.board_rider(visitor1)
+      ride2.board_rider(visitor2)
+      ride2.board_rider(visitor3)
+      ride3.board_rider(visitor1)
+      ride3.board_rider(visitor2)
+      ride3.board_rider(visitor3)
+
+      expected = {
+                  ride: ride1,
+                  riders: [visitor1,visitor2],
+                  total_revenue: ride1.total_revenue
+      }
+      expect(carnival.ride_info(ride1)).to eq(expected)
+    end
+  end
+
+  describe '#all_ride_info' do
+    it 'returns all ride info' do
+      carnival.add_ride(ride1)
+      carnival.add_ride(ride2)
+      carnival.add_ride(ride3)
+
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride1.board_rider(visitor1)
+      ride2.board_rider(visitor1)
+      ride2.board_rider(visitor2)
+      ride2.board_rider(visitor3)
+      ride3.board_rider(visitor1)
+      ride3.board_rider(visitor2)
+      ride3.board_rider(visitor3)
+
+      expected = [
+        carnival.ride_info(ride1),
+        carnival.ride_info(ride2),
+        carnival.ride_info(ride3)
+      ]
+
+      expect(carnival.all_ride_info).to eq(expected)
     end
   end
 end
