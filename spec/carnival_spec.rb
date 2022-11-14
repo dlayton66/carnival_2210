@@ -29,6 +29,13 @@ RSpec.describe Carnival do
   let(:visitor2) { Visitor.new('Tucker', 36, '$5') }
   let(:visitor3) { Visitor.new('Penny', 64, '$15') }
 
+  before(:each) do
+    visitor1.add_preference(:gentle)
+    visitor2.add_preference(:gentle)
+    visitor2.add_preference(:thrilling)
+    visitor3.add_preference(:thrilling)
+  end
+
   it 'exists and has attributes' do
     expect(carnival).to be_a Carnival
     expect(carnival.duration).to eq(7)
@@ -51,11 +58,6 @@ RSpec.describe Carnival do
       carnival.add_ride(ride2)
       carnival.add_ride(ride3)
 
-      visitor1.add_preference(:gentle)
-      visitor2.add_preference(:gentle)
-      visitor2.add_preference(:thrilling)
-      visitor3.add_preference(:thrilling)
-
       ride1.board_rider(visitor1)
       ride1.board_rider(visitor2)
       ride1.board_rider(visitor1)
@@ -75,11 +77,6 @@ RSpec.describe Carnival do
       carnival.add_ride(ride1)
       carnival.add_ride(ride2)
       carnival.add_ride(ride3)
-
-      visitor1.add_preference(:gentle)
-      visitor2.add_preference(:gentle)
-      visitor2.add_preference(:thrilling)
-      visitor3.add_preference(:thrilling)
 
       ride1.board_rider(visitor1)
       ride1.board_rider(visitor2)
@@ -101,11 +98,6 @@ RSpec.describe Carnival do
       carnival.add_ride(ride2)
       carnival.add_ride(ride3)
 
-      visitor1.add_preference(:gentle)
-      visitor2.add_preference(:gentle)
-      visitor2.add_preference(:thrilling)
-      visitor3.add_preference(:thrilling)
-
       ride1.board_rider(visitor1)
       ride1.board_rider(visitor2)
       ride1.board_rider(visitor1)
@@ -120,16 +112,11 @@ RSpec.describe Carnival do
     end
   end
 
-  describe '#visitor_count' do
-    it 'returns the total number of visitors' do
+  describe '#visitors' do
+    it 'returns an array of unique visitors' do
       carnival.add_ride(ride1)
       carnival.add_ride(ride2)
       carnival.add_ride(ride3)
-
-      visitor1.add_preference(:gentle)
-      visitor2.add_preference(:gentle)
-      visitor2.add_preference(:thrilling)
-      visitor3.add_preference(:thrilling)
 
       ride1.board_rider(visitor1)
       ride1.board_rider(visitor2)
@@ -141,7 +128,7 @@ RSpec.describe Carnival do
       ride3.board_rider(visitor2)
       ride3.board_rider(visitor3)
 
-      expect(carnival.visitor_count).to eq(3)
+      expect(carnival.visitors).to eq([visitor1,visitor2,visitor3])
     end
   end
 end

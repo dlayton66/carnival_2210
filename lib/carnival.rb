@@ -29,11 +29,15 @@ class Carnival
     end
   end
 
-  def visitor_count
-    visitors = @rides.map do |ride|
+  def visitors
+    @rides.map do |ride|
       ride.rider_log.keys
-    end.flatten.uniq.count
+    end.flatten.uniq
   end
+
+  # def visitor_hash
+  #   visitor_hash[]
+  # end
 
   # def summary
   #   {
