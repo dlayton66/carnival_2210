@@ -149,11 +149,37 @@ RSpec.describe Carnival do
       ride3.board_rider(visitor3)
 
       expected = {
+                  visitor: visitor1,
                   fave_ride: carnival.fave_ride(visitor1),
                   money_spent: carnival.money_spent(visitor1)
                  }
       
       expect(carnival.visitor_info(visitor1)).to eq(expected)
+    end
+  end
+
+  describe '#all_visitor_info' do
+    it 'returns all visitor info' do
+      carnival.add_ride(ride1)
+      carnival.add_ride(ride2)
+      carnival.add_ride(ride3)
+
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride1.board_rider(visitor1)
+      ride2.board_rider(visitor1)
+      ride2.board_rider(visitor2)
+      ride2.board_rider(visitor3)
+      ride3.board_rider(visitor1)
+      ride3.board_rider(visitor2)
+      ride3.board_rider(visitor3)
+
+      expected = [
+                  carnival.visitor_info(visitor1),
+                  carnival.visitor_info(visitor2),
+                  carnival.visitor_info(visitor3)
+      ]
+      expect(carnival.all_visitor_info).to eq(expected)
     end
   end
 

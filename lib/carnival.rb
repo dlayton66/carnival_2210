@@ -37,12 +37,18 @@ class Carnival
 
   def visitor_info(visitor)
     {
+      visitor: visitor,
       fave_ride: fave_ride(visitor),
       money_spent: money_spent(visitor)
     }
-    # visitors.each do |visitor|
-    #   visitor_hash[visitor]
-    # end
+  end
+
+  def all_visitor_info
+    all_visitor_info = []
+    visitors.each do |visitor|
+      all_visitor_info << visitor_info(visitor)
+    end
+    all_visitor_info
   end
 
   def fave_ride(visitor)
@@ -58,14 +64,10 @@ class Carnival
   end
 
   def summary
-    visitor_hash = {}
     {
       visitor_count: visitors.count,
       revenue_earned: total_revenue,
-      visitor_hash: {
-                     visitor1: visitor_info(visitor1)
-                    
-                    }
+      visitor_hash: visitor_hash
     }
   end
 end
