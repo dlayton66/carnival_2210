@@ -28,4 +28,16 @@ class Carnival
       ride.total_revenue
     end
   end
+
+  def visitor_count
+    visitors = @rides.map do |ride|
+      ride.rider_log.keys
+    end.flatten.uniq.count
+  end
+
+  # def summary
+  #   {
+  #     visitor_count: 
+  #   }
+  # end
 end
