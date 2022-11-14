@@ -45,5 +45,15 @@ RSpec.describe Ride do
       expect(visitor1.spending_money).to eq(8)
       expect(visitor2.spending_money).to eq(4)
     end
+
+    it 'tallies ride total revenue' do
+      expect(ride1.total_revenue).to eq(0)
+
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride1.board_rider(visitor1)
+
+      expect(ride1.total_revenue).to eq(3)
+    end
   end
 end
