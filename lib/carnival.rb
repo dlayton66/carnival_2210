@@ -89,7 +89,8 @@ class Carnival
     {
       visitor_count: visitors.count,
       revenue_earned: total_revenue,
-      all_visitor_info: all_visitor_info
+      all_visitor_info: all_visitor_info,
+      all_ride_info: all_ride_info
     }
   end
 end

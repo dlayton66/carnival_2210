@@ -297,4 +297,29 @@ RSpec.describe Carnival do
       expect(carnival.all_ride_info).to eq(expected)
     end
   end
+
+  describe '#summary' do
+    it 'is a summary for the whole carnival' do
+      carnival.add_ride(ride1)
+      carnival.add_ride(ride2)
+      carnival.add_ride(ride3)
+
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride1.board_rider(visitor1)
+      ride2.board_rider(visitor1)
+      ride2.board_rider(visitor2)
+      ride2.board_rider(visitor3)
+      ride3.board_rider(visitor1)
+      ride3.board_rider(visitor2)
+      ride3.board_rider(visitor3)
+        
+      expect(carnival.summary[:visitor_count]).to eq(3)
+      expect(carnival.summary[:revenue_earned]).to eq(10)
+      expect(carnival.summary[:all_visitor_info].size).to eq(3)
+      expect(carnival.summary[:all_visitor_info][0]).to eq(carnival.visitor_info(visitor1))
+      expect(carnival.summary[:all_ride_info].size).to eq(3)
+      expect(carnival.summary[:all_ride_info][0]).to eq(carnival.ride_info(ride1))
+    end
+  end
 end
